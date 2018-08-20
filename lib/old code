@@ -6,15 +6,15 @@ class Animation {
     this.ctx = ctx;
     this.img = img;
     this.frame = 0;
-    this.sheetWidth = 5030;
-    this.sheetHeight = 118;
-    this.cols = 28;
-    this.rows = 1;
-    this.width = this.sheetWidth/this.cols;
-    this.height = this.sheetHeight/this.rows;
+    this.sheetWidth = 2048;
+    this.sheetHeight = 2048;
+    this.cols = 8;
+    this.rows = 4;
+    this.width = 210;
+    this.height = 110;
     this.srcX = 0;
     this.srcY = 0;
-    this.delay = 8;
+    this.delay = 12;
   }
 
   change(frame_set, delay = 15) {
@@ -23,11 +23,23 @@ class Animation {
 
   updateFrame() {
     if(--this.delay > 0){return;};
-    this.delay = 8;
-    this.frame = ++this.frame % 8;
+    this.delay = 12;
+    this.numRender += 1;
+    if(this.numRender === 26) {
+      this.frame = 0;
+      this.srcX = 0;
+      this.srcY = 0;
+      this.count = 0;
+      this.numRender = 0;
+    }
+    this.frame = ++this.frame % this.cols;
     this.srcX = this.frame * this.width;
 
-    this.srcY = 0;
+    if(this.frame === 0) {
+      this.count = ++this.count % this.rows;
+
+    }
+    this.srcY = this.count * this.height;
     this.ctx.clearRect(0,0,this.width,this.height);
   }
   drawImage() {
@@ -47,3 +59,4 @@ class Animation {
 
 
 module.exports = Animation;
+
