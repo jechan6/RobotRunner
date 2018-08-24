@@ -5,21 +5,21 @@ body {
   display: flex;
   justify-content: center;
   flex-direction: column;
-
+  align-items: center;
 }
 .title-header {
   margin: 0 auto;
-
   text-align: center;
   letter-spacing: 1px;
-  margin-right: 50%;
+  margin-right: 48%;
   background: red;
   background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
 
   white-space: nowrap;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-size: 50px;
+  font-size: 60px;
+  padding: 0;
 }
 .container {
 
@@ -39,6 +39,7 @@ body {
 
 .top-scores {
   height: 200px;
+  margin-left: 50px;
 }
 
 .top-scores li {
@@ -73,7 +74,7 @@ body {
 }
 .restart-btn {
 
-  margin-left: 95px;
+  margin-left: 245px;
   padding: 15px 45px;
   margin-top: 5px;
   background: #5cbcf6;
