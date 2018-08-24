@@ -32,7 +32,7 @@ body {
   padding: 5px;
   color: rgba(255,255,255,0.8);
 }
-.top-scores li:last-child {
+#third{
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }
@@ -66,6 +66,10 @@ body {
   border-radius: 15px;
   color: white;
   letter-spacing: 1px;
+}
+.a {
+  width: 50px;
+  height: 50px;
 }
 .instruction {
   margin-left: 50px;

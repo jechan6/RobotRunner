@@ -231,7 +231,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   canvas.height = 512;
   const restart = document.getElementsByClassName("restart-btn")[0];
 
-
   let unicorn = new Image();
   unicorn.src = "./lib/unicorn.png";
   if(!localStorage.getItem("first")) {
@@ -268,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 const Player = __webpack_require__(/*! ./player.js */ "./lib/player.js");
 const Platforms = __webpack_require__(/*! ./platforms.js */ "./lib/platforms.js");
 const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-
+const sound = __webpack_require__(/*! ./sound.js */ "./lib/sound.js");
 class Game {
   constructor(unicorn) {
 
@@ -286,7 +285,8 @@ class Game {
     this.score = 0;
     this.ogPlatforms = _.cloneDeep(this.platforms);
     this.scoreEl = document.getElementsByClassName("score-text")[0];
-    // this.gameLost = false;
+    this.bombSound = new sound("./lib/bomb.mp3");
+
   }
   isOutOfBounds(pos) {
     return (pos[0] < 0) || (pos[1] < 0) ||
@@ -353,12 +353,11 @@ class Game {
 
     }
   }
-  gameOver(dir = "") {
+  gameOver() {
     if(this.player.pos[1] > Game.DIM_Y - 150) {
       this.player.key = 2;
-
-
       if(this.player.pos[1] >= Game.DIM_Y-100) {
+        this.bombSound.play();
         return true;
       }
     }
@@ -394,7 +393,10 @@ class Game {
         this.player.jumping = false;
         this.player.key = 0;
       } else if(dir === "bottom") {
-        this.player.velY *= -1;
+        this.bombSound.play();
+        this.ctx = null;
+        this.player.key = 2;
+        return;
       } else if(dir === "left") {
         this.gameLost = true;
       }
@@ -628,12 +630,11 @@ class Player extends MovingObject  {
       this.velY += 9;
     }
     this.pos[1] += this.velY;
-    if (this.pos[1] + this.height > 450) {
+    if (this.pos[1] + this.height > 800) {
       this.jumping = false;
       this.velY = 0;
       this.key = 0;
     }
-
     this.frame_index = ++this.frame_index % this.frame_set[this.key].length;
     this.frame = this.frame_set[this.key][this.frame_index];
   }
