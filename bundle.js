@@ -222,12 +222,15 @@ const Animation = __webpack_require__(/*! ./animation.js */ "./lib/animation.js"
 const Player = __webpack_require__(/*! ./player.js */ "./lib/player.js");
 const Game = __webpack_require__(/*! ./game.js */ "./lib/game.js");
 const GameView = __webpack_require__(/*! ./game_view.js */ "./lib/game_view.js");
+const sound = __webpack_require__(/*! ./sound.js */ "./lib/sound.js");
+
 document.addEventListener("DOMContentLoaded", function(event) {
   const canvas = document.getElementById('game-canvas');
   let ctx = canvas.getContext('2d');
   canvas.width = 1024;
   canvas.height = 512;
   const restart = document.getElementsByClassName("restart-btn")[0];
+
 
   let unicorn = new Image();
   unicorn.src = "./lib/unicorn.png";
@@ -236,14 +239,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
     localStorage.setItem("second", 0);
     localStorage.setItem("third", 0);
   }
+
+  const mySound = new sound("./lib/App_my_first.mp3");
   let game = new Game(unicorn);
-  let gameView = new GameView(game,ctx);
+  let gameView = new GameView(game,ctx, mySound);
   restart.addEventListener("click", () => {
 
     gameView.restart = true;
     ctx = canvas.getContext('2d');
     game = new Game(unicorn);
-    gameView = new GameView(game,ctx);
+    gameView = new GameView(game,ctx,mySound);
     gameView.start();
   });
   gameView.start();
@@ -263,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 const Player = __webpack_require__(/*! ./player.js */ "./lib/player.js");
 const Platforms = __webpack_require__(/*! ./platforms.js */ "./lib/platforms.js");
 const _ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
 class Game {
   constructor(unicorn) {
 
@@ -351,7 +357,7 @@ class Game {
     if(this.player.pos[1] > Game.DIM_Y - 150) {
       this.player.key = 2;
 
-  
+
       if(this.player.pos[1] >= Game.DIM_Y-100) {
         return true;
       }
@@ -436,14 +442,24 @@ module.exports = Game;
 /***/ (function(module, exports) {
 
 class GameView {
-  constructor(game, ctx) {
+  constructor(game, ctx,sound) {
     this.ctx = ctx;
     this.game = game;
     this.restart = false;
+    this.sound = sound;
   }
   bindKeyHandlers() {
     const player = this.game.player;
-    key("z", () => {player.change("jump")});
+
+    key("z", () => {
+      player.change("jump")
+    });
+    key("n", () => {
+      this.sound.play();
+    })
+    key("m", () => {
+      this.sound.stop();
+    });
   }
 
   start() {
@@ -475,7 +491,7 @@ class GameView {
       } else if(scoreTmp > localStorage.getItem("third")) {
         localStorage.setItem("third", scoreTmp);
       }
-      
+
     }
 
   }
@@ -644,6 +660,33 @@ class Player extends MovingObject  {
 
 
 module.exports = Player;
+
+
+/***/ }),
+
+/***/ "./lib/sound.js":
+/*!**********************!*\
+  !*** ./lib/sound.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+}
+
+module.exports = sound;
 
 
 /***/ }),
