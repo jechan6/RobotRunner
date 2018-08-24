@@ -1,20 +1,37 @@
 body {
   font-family: 'Roboto Condensed', sans-serif;
+}
+.content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
 }
+.title-header {
+  margin: 0 auto;
+
+  text-align: center;
+  letter-spacing: 1px;
+  margin-right: 50%;
+  background: red;
+  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+
+  white-space: nowrap;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+}
 .container {
-  width: 1400px;
+
   position: relative;
 }
 #game-canvas {
-  display: block;
   margin: 0 auto;
-
 }
 .score-text {
   position: absolute;
-  left: 60%;
-  top: 0;
+  left: 63%;
+  top: 10%;
 }
 .top-row {
   display: flex;
@@ -56,8 +73,8 @@ body {
 }
 .restart-btn {
 
-  margin-left: 60px;
-  padding: 25px 50px;
+  margin-left: 95px;
+  padding: 15px 45px;
   margin-top: 5px;
   background: #5cbcf6;
   border: 0;
