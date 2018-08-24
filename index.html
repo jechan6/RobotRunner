@@ -3,10 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="./lib/stylesheets/canvas.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
   </head>
   <body>
 
-    <canvas id="game-canvas"></canvas>
+    <div class="container">
+
+      <div class="top-row">
+        <canvas id="game-canvas"></canvas>
+        <div class="top-scores">
+          <div class="high-score">High Scores</div>
+          <div class="score-items">
+            <li id="first"></li>
+            <li id="second"></li>
+            <li id="third"></li>
+          </div>
+        </div>
+      </div>
+      <h1 class="score-text">Score: </h1>
+      <div class="control-container">
+
+        <button class="restart-btn">Restart</button>
+        <h1 class="instruction">Press z to jump and keep on running!</h1>
+      </div>
+        <audio id="audio" src="./lib/App_my_first.mp3" type="audio/ogg"  muted="muted" autoplay></audio>
+    </div>
+
     <script src="keymaster.js"></script>
     <script type="text/javascript" src="./lib/bundle.js">
     </script>

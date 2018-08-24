@@ -1,6 +1,80 @@
-/* #game-canvas {
-  background: url("../forest.png");
-  background-repeat: no-repeat;
-  background-size: cover;
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.container {
+  width: 1400px;
+  position: relative;
+}
+#game-canvas {
+  display: block;
+  margin: 0 auto;
 
-} */
+}
+.score-text {
+  position: absolute;
+  left: 60%;
+  top: 0;
+}
+.top-row {
+  display: flex;
+}
+
+.top-scores {
+  height: 200px;
+}
+
+.top-scores li {
+  list-style-type: none;
+  text-align: center;
+  font-size: 18px;
+  margin-right: 25px;
+  background: #333;
+  padding: 5px;
+  color: rgba(255,255,255,0.8);
+}
+.top-scores li:last-child {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.high-score {
+  color: black;
+  margin-right: 25px;
+  font-size: 35px;
+  background: #222;
+  border-top: 1px solid black;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  color: white;
+  padding: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.control-container {
+  display: flex;
+}
+.restart-btn {
+
+  margin-left: 60px;
+  padding: 25px 50px;
+  margin-top: 5px;
+  background: #5cbcf6;
+  border: 0;
+  outline: 0;
+
+  font-size: 25px;
+  border-radius: 15px;
+  color: white;
+  letter-spacing: 1px;
+}
+.instruction {
+  margin-left: 50px;
+  color: #5cbcf6;
+  letter-spacing: .015em;
+
+}
+.restart-btn:hover {
+  background: #87CEEB;
+  transition: 100ms all linear;
+  transform: scale(1.04);
+}
