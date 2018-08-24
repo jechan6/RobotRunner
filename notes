@@ -1,1 +1,1 @@
-webpack --watch lib/dino.js -o lib/bundle.js --mode=development
+webpack --watch lib/dino.js -o bundle.js --mode=development
